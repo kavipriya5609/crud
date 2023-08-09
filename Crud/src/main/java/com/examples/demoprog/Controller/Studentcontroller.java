@@ -23,13 +23,24 @@ public class Studentcontroller {
 	
 	@PostMapping("/add")
 	public Student adddata(@RequestBody Student student){
-		rep.save(student);
+	try {	rep.save(student);
 		return student;
+		}
+	catch(Exception ex) {
+		ex.printStackTrace();
+	}
+	return null;
 	}
 	@GetMapping("/getall")
 	public List<Student>getAllUsers(){
+		try {
 		return rep.findAll();
 	}
+		catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return null;
+		}
 	
 	@PutMapping("/update")
 	public Student update(@RequestBody Student student) {
@@ -40,10 +51,10 @@ public class Studentcontroller {
 		catch(Exception ex) {
 			ex.printStackTrace();
 		}
-		return student;
+		return null;
 	}
 	
-   @DeleteMapping("/getdel/{Id}")
+   @DeleteMapping("/delete")
 		public String del (@PathVariable int Id) {
 			try {
 			@SuppressWarnings("deprecation")
